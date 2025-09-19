@@ -1,0 +1,22 @@
+<%- include("partials/header") %>
+<body class="index-body">
+    <h1>Welcome to the Blog</h1>
+    <% if (!locals.toUpdate) { %>
+        <form action="/post" method="POST">
+            <input type="text" name="title" class="title-field" placeholder="Title of the post" required>
+            <textarea name="content" class="content-field" placeholder="Write ypur thoughts here" required></textarea>
+            <input type="text" name="author" class="author-field" placeholder="What's your name" required>
+            <button class="submit-button" type="submit">Create Post</button>
+        </form>
+    <% } else { %>
+        <form action="/updatedData" method="POST">
+            <input type="text" name="title" class="title-field" value="<%= postToUpdate.title %>" required>
+            <textarea name="content" class="content-field" required><%= postToUpdate.content %></textarea>
+            <input type="text" name="author" class="author-field" value="<%= postToUpdate.author %>" required>
+            <input type="hidden" name="index" value="<%= index %>">
+            <button class="submit-button" type="submit">Update Post</button>
+        </form>
+    <% } %>
+</body>
+
+<%- include("partials/footer") %>
